@@ -51,11 +51,14 @@ root.title('pywin98')
 root.resizable(False, False)
 root.bind("<Button-1>", click_start)
 root.bind("<B1-ButtonRelease>", click_stop)
-C = Canvas(bg='#008080', highlightthickness=0,
+C = Canvas(bg='darkcyan', highlightthickness=0,
            borderwidth=0,height=300,width=400)
 customcursor = True # Disable if you dislike windows 95 cursor
 kext = ''
+def changebg(clr):
+    C.config(bg=clr)
 def update():
+    print('Updating screen.')
     C.delete('all')
     if customcursor:
         C.config(cursor="@arrow.cur")
@@ -68,13 +71,25 @@ def update():
     button(10,185,30,'BSOD',cnvs=C,scrn=6, id=0,sid=screen)
     button(10,220,30,'Clock',cnvs=C,scrn=7, id=0,sid=screen)
     button(50,10,30,'Magic ball',cnvs=C,scrn=8, id=0,sid=screen)
+    button(50,45,30,'Background',cnvs=C,scrn=9, id=0,sid=screen)
     # add other background to other screens
     if screen > 0:
         C.create_rectangle(0, 0, 400,
                          300,
                          fill="lightgrey")
     # Other screens
-    if screen == 1:
+    if screen == 9:
+        button(0,0,50,cnvs=C,text='lightgrey',function="changebg('lightgrey')")
+        button(50,0,50,cnvs=C,text='grey',function="changebg('grey')")
+        button(100,0,50,cnvs=C,text='darkcyan',function="changebg('darkcyan')")
+        button(150,0,50,cnvs=C,text='red',function="changebg('red')")
+        button(200,0,50,cnvs=C,text='blue',function="changebg('blue')")
+        button(250,0,50,cnvs=C,text='green',function="changebg('green')")
+        button(300,0,50,cnvs=C,text='darkblue',function="changebg('darkblue')")
+        button(300,0,50,cnvs=C,text='lightcyan',function="changebg('lightcyan')")
+        button(350,0,50,cnvs=C,text='cyan',function="changebg('cyan')")
+        button(400,0,50,cnvs=C,text='darkred',function="changebg('darkred')")
+    elif screen == 1:
         text(random.randint(-1,1)+200,random.randint(-1,1)+150,C,"Sorry but i am lazy to make explorer")
     elif screen == 5:
         text(random.randint(-10,10)+200,random.randint(-10,10)+150,C,"Dont be lazy, shutdown it myself")
